@@ -1,0 +1,56 @@
+create database album;
+
+use album;
+
+
+create table musica(
+	idMusica int primary key auto_increment,
+    nome varchar (30),
+    artista varchar (30),
+    genero varchar (30)
+    );
+    
+    insert into musica value 
+    
+    (null, 'sorrisos', 'l7nnon', 'hip-hop', 01),
+    (null, 'avareza', 'xamã', 'rap', 02),
+    (null, 'invicto', 'filipe ret', 'hip-hop/rap', 03),
+    (null, 'pico loco', 'adz', 'dance', 04);
+    
+    
+    select * from musica;
+
+
+create table album (
+	idAlbum int primary key auto_increment,
+    nome varchar (30),
+    gravadora varchar (30)
+    );
+    
+    
+	insert into album value
+    
+    (null, 'podium', 'warner music'),
+    (null, 'pecado capital', 'baguá records'),
+	(null, 'revel', 'TUDUBOM RECORDS'),
+    (null, 'minhas tracks', 'MM Music'),
+	(null, 'melophobia', 'RCA Records');
+    
+    select * from album;
+    
+    alter table musica add column fk_album int;
+    
+	select * from musica as m, album as a where m.fk_Album = 1 and a.nome = 'podium';
+    
+    select * from musica as m, album as a where m.fk_Album = idAlbum and a.gravadora = 'warner music';
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+    
