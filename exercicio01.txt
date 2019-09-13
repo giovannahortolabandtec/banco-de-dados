@@ -1,0 +1,44 @@
+create database pais;
+use pais;
+
+create table pais (
+idPais int primary key auto_increment,
+nome varchar (30),
+capital varchar (30)
+);
+
+insert into pais value
+ 
+(null, 'Brasil', 'Brasilia'),
+(null, 'Argentina', 'Buenos Aires'),
+(null, 'Japão', 'Tokyo'),
+(null, 'Estados Unidos', 'Washington'),
+(null, 'Canada', 'Ottawa');
+
+
+select * from pais;
+
+
+create table atleta (
+idAtleta int primary key auto_increment,
+nome varchar (30),
+medalha varchar (30),
+esporte varchar (30)
+);
+
+alter table atleta add column fk_pais int;
+
+select * from atleta;
+
+insert into atleta value 
+(null, 'bruno', 'ouro', 'volei', 1),
+(null, 'luan', 'prata', 'futebol', 2),
+(null, 'victor', 'bronze', 'futebol', 3);
+
+select atleta.*, pais.* from atleta, pais where fk_pais = idPais and idPais = 2;
+
+
+
+
+
+
