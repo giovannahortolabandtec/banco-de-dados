@@ -1,0 +1,48 @@
+create database ads;
+use ads;
+
+create table aluno(
+	idAluno int primary key auto_increment,
+	nome varchar(30),
+	email varchar(30)
+);
+
+create table notebook(
+	idNote int primary key auto_increment,
+	fab varchar(30),
+	modelo varchar(30)
+);
+
+create table log_not(
+	fk_aluno int,
+    foreign key (fk_aluno) references aluno(idAluno),
+    fk_note int,
+    foreign key (fk_note) references notebook(idNote)
+    );
+    
+    insert into aluno value 
+    (null, 'Emilly', 'emi@gmail.com'),
+	(null, 'Giovanna', 'gio@gmail.com');
+    
+    insert into notebook value 
+    (001, 'Dell', 'vostro'),
+    (002, 'HP', '240');
+    
+    insert into log_not value 
+    (01, 001),
+    (02, 002);
+    
+select a.nome, note.modelo from aluno as a, log_not as lo, notebook as note where a.idAluno = lo.fk_aluno;
+
+select a.nome, note.modelo from aluno as a, log_not as lo, notebook as note where a.idAluno = lo.fk_aluno and lo.fk_note = idNote and idNote = 2;
+
+select a.nome, note.modelo from aluno as a, log_not as lo, notebook as note where a.idAluno = lo.fk_aluno and lo.fk_note = note.idNote and idNote = 1;
+
+
+
+
+
+
+
+
+
