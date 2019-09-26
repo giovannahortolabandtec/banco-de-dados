@@ -1,0 +1,26 @@
+Tipos(tipagem/grupos) de atributos:
+- focado ao conteúdo do campo.
+
+ATÔMICO/ SIMPLES/ PRIMITIVO:
+- não pode ser dividido em subpartes menores.
+Exemplos: sexo, cor
+
+COMPOSTO:
+- pode ser dividido em subpartes menores, com significado (varias partes).
+Exemplos: endereço - rua, cidade, cep, estado
+
+MULTIVALORADOS:
+- pode ter mais de um valor (varias informações).
+Exemplo: telefone
+
+MONOVALORADOS:
+- tem apenas um valor na mesma entidade
+Exemplos: nome, locas de nascimento
+
+IDENTIFICADOR/ DETERMINANTE:
+- identifica de forma única uma ocorrência; correspondendo a uma chave primária 
+Exemplos: RA, código
+
+
+
+
