@@ -15,7 +15,7 @@ Exemplo: telefone
 
 MONOVALORADOS:
 - tem apenas um valor na mesma entidade
-Exemplos: nome, locas de nascimento
+Exemplos: nome, local de nascimento
 
 IDENTIFICADOR/ DETERMINANTE:
 - identifica de forma única uma ocorrência; correspondendo a uma chave primária 
