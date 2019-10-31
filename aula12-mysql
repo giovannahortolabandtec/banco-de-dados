@@ -1,0 +1,92 @@
+create database escola;
+use escola;
+
+create table aluno(
+	ra int primary key auto_increment,
+    nome varchar(30),
+    bairro varchar(30)
+);
+
+insert into aluno values
+	(null, 'Giovanna Hortolã', 'Vila Prudente'),
+	(null, 'Leonado Aparecido', 'Ferraz de Vasconcelos'),
+	(null, 'André Torelli', 'Guaianases'),
+	(null, 'Emilly Santos', 'Carapicuiba'),
+	(null, 'Eduarda OLinto', 'Oratório');
+
+create table disciplina(
+	idDisc int primary key auto_increment,
+    nome varchar(30)
+);
+
+insert into disciplina values
+	(null, 'Banco de Dados'),
+	(null, 'Algoritimos'),
+	(null, 'Arq.Comp'),
+	(null, 'Socioemocional'),
+	(null, 'Tecnologia da informação');
+
+-- criar tabela associativa entre aluno e disciplina
+create table semestre(
+	fkAluno int,	-- chave estrangeira de aluno
+	foreign key (fkAluno) references aluno(ra),
+    fkDisc int,		-- chave estrangeira de disciplina
+    foreign key (fkDisc) references disciplina(idDisc),
+    periodoLetivo int,	
+    primary key (fkAluno, fkDisc, periodoLetivo),	-- chave primária composta
+    media decimal(4,2),		-- média do aluno na disciplina
+    qtdFaltas int			-- quantidade de faltas do aluno
+);
+
+insert into semestre values
+	(1, 2, 20194, 8.9, 4),
+	(2, 3, 20192, 7.6, 2),
+	(3, 5, 20193, 4.5, 8),
+	(4, 1, 20194, 8.0, 17),
+	(5, 4, 20191, 9.0, 10);
+
+select * from semestre;
+
+-- exibir os dados dos alunos e das disciplinas correspondentes
+select * from aluno, disciplina, semestre where fkAluno = ra and fkDisc = idDisc;
+select * from aluno as alu, disciplina as dis, semestre as sem where sem.fkAluno = alu.ra and sem.fkDisc = dis.idDisc;
+
+-- exibir a soma das médias e a soma das qtdFaltas
+select sum(qtdFaltas) from semestre;
+
+-- exibir a soma das médias e a soma das qtdFaltas, mas dando nome as coluna
+select avg(media) as 'Média das médias',
+	avg(qtdFaltas) as 'Média das qtd de faltas' from semestre;
+
+-- media das faltas da Giovanna 
+select avg(qtdFaltas) as 'Média das faltas', a.nome from semestre as s, aluno as a
+	where s.fkAluno = a.ra and a.nome = 'Giovanna Hortolã';
+
+-- exibir as média das médias arredondada para 2 casas decimais -- e a média das qtdFaltas
+select round(avg(media),2) as 'Média das médias',
+	avg(qtdFaltas) as 'Média das qtd de faltas' from semestre;
+
+-- exibir o maior e a menor média da table semestre
+select max(media) as 'Maior média',
+	min(media) as 'Menor média' from semestre;
+
+-- exibir a maior e a mnenor nota da table semestre
+select max(qtdFaltas) as 'Maior falta',
+	min(qtdFaltas) as 'Menor falta' from semestre;
+    
+-- exibir a maior e a menor média agrupado por disciplina -- group by mostra as maiores e menores médias por disciplina
+select fkDisc, max(media) as 'Maior média',	
+	min(media) as 'Menor média' from semestre group by fkDisc;
+
+-- exibir a maior e menor média agrupado por aluno 
+select fkAluno, max(media) as 'Maior média',
+	min(media) as 'Menor média' from semestre group by fkAluno;
+
+-- exibir as médias diferentes da table semestre -- serve para contar a quantidade de notas diferentes (não repetem)
+select distinct media from semestre;
+
+-- exibir a quantidade de médias da tabela semestre -- conta quantas quantidades de médias tem
+select count(media) as 'Quantidade de médias' from semestre;
+
+-- exibir a quantidade de médias distintas da tabela semestre - ignora as duplicação, e mostra o numero exato de algum determinado dado
+select count(distinct media) as media from semestre;
